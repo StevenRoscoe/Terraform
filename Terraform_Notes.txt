@@ -1,0 +1,71 @@
+What does cloud agnostic mean?
+-When a technology is not bound to one cloud and can work in a similar fashion
+across other cloud environments.
+
+What is Infrastructure as Code?
+-IaC is as simple as writing down what you want to deploy as human readable 
+instead of clicking on multiple items in multiple services to try and spin up a
+single VM.
+-It enables DevOps, meaning that coding your deployment allows it to be tracked
+in version control enabling better visibility and collaboration across teams.
+This manifests into better teamwork as everyone can see the code, and everyone
+can agree and/or disagree on what they like and dislike.
+-Less human intervention during deployment means reduced chances of security 
+flaws, overflow of resources, and more time saved overall.
+
+The Core Terraform Workflow
+-Write > Plan > Apply
+-Write = as a common best practice, you would normally start off with creating a 
+GitHub repo to write your code.
+-Plan = you'll continually add and review changes to code in your project.
+-Apply = after the last review/plan, you'll be ready to provision real 
+infrastructure.
+
+Terraform Init (Initializing the working directory)
+terraform init
+-initializes the working directory that contains your Terraform code.
+-downloads the modules and plugins.
+-sets up the backend for storing Terraform state file, a mechanism by which 
+Terraform tracks resources.
+
+terraform plan
+-reads the code and then creates and shows a "plan" of execution/deployment.
+Think of it as a read-only command. At this stage, authentication credentials are
+used to connect to your infrastructure. if required. 
+
+terraform apply
+-deploys the instructions and statements in the code. Updates the deployment 
+state tracking mechanism file, or the state file.
+
+terraform destroy
+-looks at the recorded, stored state file created during the deployment and 
+destroys all resources created by your code. Should be sued with caution as it 
+is a non-reversible command. Take backups, and be sure that you want to delete
+the infrastructure.
+
+Code Snippet (Configuring the Provider):
+provider "aws"{
+    region = "us-east-1"
+}
+
+provider "google"{
+    credentials = file("credentials.json")
+    project     = "my-gcp-project"
+    region      = "us-west-1"
+}
+
+
+Code Snippet (Configuring the Resource Block):
+resource "aws_instance" "web" {
+    ami           = "ami-a1b2c3d4"
+    instance_type = "t2.micro"
+}
+
+
+Code Snippet (Data Source):
+data  "aws_instance" "my-vm" {
+    instance_id = "i-1234567890abcdef0"
+}
+
+Terraform Code
+-Terraform executes code in files with the .tf extension.
