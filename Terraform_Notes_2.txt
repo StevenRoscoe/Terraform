@@ -1,0 +1,119 @@
+-Terraform, by default, looks for Providers in the Terraform providers registry:
+-http://registry.terraform.io/browse/providers
+-Providers are basically plugins. They are released separately from Terraform
+itself, and each provider has its own series of version numbers. Terraform finds
+and installs providers when initializing working directory (terraform init).
+-As a best practice, Providers should be pegged down to a specific version, so 
+that any changes across provider version doesn't break your Terraform code.
+-You can go to the Terraform registry and look up the providers and version
+number to specify which one you want to use for your code.
+
+-Terraform State matters because of resource tracking. It's a way for Terraform 
+to keep tabs on what has been deployed. This is critical to Terraform's 
+functionality as it can refer back to the state of deployed resources in order 
+to see what needs to be created from scratch, modified, or destroyed.
+
+Variables in Terraform:
+variable "my-var"{
+    description = "My Test Variable"
+    type        = string
+    default     = "Hello"
+}
+
+Variable Type Constraints
+Base Types:
+-string
+-number
+-bool
+Complex Types:
+-list
+-set
+-map
+-object
+-tuple
+
+String Type:
+variable "image_id"{
+    type       = string
+    default    = "Hello"
+}
+
+List Type:
+variable "availability_zone_names"{
+    type       = list(string)
+    default    = ["us-west-1a"]
+}
+
+List of Objects:
+variable "docker_ports"{
+    type = list(object({
+      internal = number
+      external = number
+      protocol = string
+    }))
+    default = [
+      {
+        internal = 8300
+        external = 8300
+        protocol = "tcp"
+      }
+    ]
+}
+
+Output Value:
+output "instance_ip"{
+   description = "VM's Private IP"
+   value = aws_instance.my-vm.private_ip
+}
+
+-Output variable values are shown on the shell after running terraform apply.
+Think of output values like return values after running code in a programming 
+language.
+
+
+Provisioners Sample Code:
+resource "null_resource" "mk" {
+  provisioner "local-exec" {
+    command = "echo '0' > status.txt"
+  }
+  provisioner "local-exec" {
+    when    = destroy
+    command = "echo '1' > status.txt"
+  }
+}
+
+-Provisioners are Terraform's way of giving users the ability to execute custom
+scripts or commands through Terraform resources. There are two types of 
+provisioners: "Creation-time" and "Destroy-time" provisioners which you can set 
+to run when a resource is being created or destroyed. 
+
+Best Practices and Cautions:
+-Hashicorp recommends using Provisioners as a last resort and to try using 
+inherent systems within your infrastructure deployment to carry out custom 
+tasks where possible.
+-Ex: Using user-data scripts in EC2 instances instead of Provisioners.
+-Provisioners are recommended for use when you want to invoke actions not 
+covered by Terraform's declarative model.
+-If the command within a provisioner returns non-zero return code, it's 
+considered failed and underlying resource is tainted.
+
+Terraform State
+
+
+
+# Configure the Docker provider
+provider "docker" {}
+
+#Image to be used by container
+resource "docker_image" "terraform-centos" {
+  name         = "centos:7"
+  keep_locally = true
+}
+
+# Create a container
+resource "docker_container" "centos" {
+  image   = docker_image.terraform-centos.latest
+  name    = "terraform-centos"
+  start   = true
+  command = ["/bin/sleep", "500"]
+}
