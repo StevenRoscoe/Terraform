@@ -1,0 +1,31 @@
+Terraform State
+
+# Configure the Docker provider
+provider "docker" {}
+
+#Image to be used by container
+resource "docker_image" "terraform-centos" {
+  name         = "centos:7"
+  keep_locally = true
+}
+
+# Create a container
+resource "docker_container" "centos" {
+  image   = docker_image.terraform-centos.latest
+  name    = "terraform-centos"
+  start   = true
+  command = ["/bin/sleep", "500"]
+}
+
+-Terraform State matters a lot. Simply put, it maps real-world resources to 
+Terraform configurations. By default, the state is stored locally in a file 
+called terraform.tfstate. Prior to any modification done in the file, Terraform
+refreshes the state file. Resource dependancy metadata is also tracked via the 
+state file. The Terraform state file also helps to boost deployment performance
+by caching resource attributes for continuous use. 
+
+Common Terraform State commands:
+terraform statelist -- list all resources tracked by the state file.
+terraform state rm -- delete a resource from the state file.
+terraform state show -- show details of a resource tracked in the state file. 
+
