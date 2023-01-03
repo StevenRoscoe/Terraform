@@ -13,8 +13,3 @@ echo "<!DOCTYPE html>
     <h1>Welcome to the page Green Team!</h1>
 </body>
 </html>" >> var/www/html/index.html
-
-
-
-
-
