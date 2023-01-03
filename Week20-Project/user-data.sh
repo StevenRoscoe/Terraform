@@ -7,7 +7,6 @@ systemctl start httpd
 echo "<!DOCTYPE html>
 <html>
 <head>
-    <title>This webpage was built using TERRAFORM!!!!</title>
 </head>
 <body>
     <h1>Welcome to the page Green Team!</h1>
