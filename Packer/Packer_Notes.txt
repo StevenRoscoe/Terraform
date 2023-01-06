@@ -1,0 +1,16 @@
+#Packer builds machine images. A machine image is a resource that stores all 
+configurations, permissions, and metadata needed to create a virtual machine.
+
+#Packer produces machine images based on written templates, and can be written
+in JSON or HCL2. 
+
+#Packer can be used to generate templates for different cloud providers as well.
+There's no need to spin up a VM and make changes yourself. Describe your 
+desired machine image and let Packer generate it.
+
+#Packer fits in nicely with existing CI/CD pipelines. Use it to automatically
+test new configuration management formulas or push approved builds to 
+production. 
+
+#A single Packer template can create machines images for multiple use cases, 
+whether they're cross-cloud, cross-platform, or cross-environment.
