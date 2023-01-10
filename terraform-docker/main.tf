@@ -1,8 +1,8 @@
 terraform {
   required_providers {
     docker = {
-      source  = "kreuzwerker/docker"
-      version = "~> 2.24.0"
+      source  = "terraform-providers/docker"
+      version = "~> 2.7.2"
     }
   }
 }
@@ -20,4 +20,9 @@ resource "docker_container" "nodered_container" {
     internal = 1880
     external = 1880
   }
+}
+
+output "IP Address" {
+  value = docker_container.nodered_container.ip_address
+  description = "The IP Address of the container"
 }
