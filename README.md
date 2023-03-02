@@ -1,2 +1,2 @@
-# Terraform
-Terraform Notes and Personal Projects
+# IaC
+Terraform and CloudFormation notes, projects, and templates
