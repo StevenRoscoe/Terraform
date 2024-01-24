@@ -8,13 +8,11 @@ As a new Linux Admin, your team wants to test out a webpage on their Linux test 
 
 <h2>Languages and Utilities Used</h2>
 
-- <b>Bash</b> 
-- <b>Command Line</b> (Windows)
+- <b>Terraform (HCL)</b> 
 
 <h2>Environments Used </h2>
 
-- <b>Windows 10</b> (21H2)
-- <b>CentOS 8</b> (A Cloud Guru)
+- <b>Amazon Web Services</b> (21H2)
 
 <h2>Project walk-through:</h2>
 
