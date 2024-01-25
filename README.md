@@ -2,7 +2,7 @@
 
 
 <h2>Description</h2>
-As a new Linux Admin, your team wants to test out a webpage on their Linux test server. They’d like to see if they could access the webpage over the internet. Your job is to install the test web server that will serve up the webpage for your team:
+Your team needs you to deploy a webserver for your company using Terraform. High-availability and fault-tolerance is paramount. For this project you are allowed to have all your code in a single main.tf file (known as a monolith) with hardcoded data:
 <br />
 
 
