@@ -15,7 +15,7 @@ Your team needs you to deploy a webserver for your company using Terraform. High
 - <b>Amazon Web Services</b> (21H2)
 
 <h2>Project walk-through:</h2>
-
+Create a new file titled main.tf in your Cloud9 IDE. This automatically registers in the server that you’re creating a Terraform file:
 
 
 
